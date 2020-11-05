@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:54:29 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 15:38:26 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/05 19:15:25 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check_digit(const char *s, t_flags *flags, va_list ap, int f)
 	i = 0;
 	if (f == PRECISION && s[i++] != '.')
 	{
-		flags->precision = -1;
+		flags->precision = PRECISION_OFF;
 		return (0);
 	}
 	num = 0;
@@ -48,12 +48,14 @@ static int	check_digit(const char *s, t_flags *flags, va_list ap, int f)
 		i++;
 	}
 	else
-	{
 		while (s[i] >= '0' && s[i] <= '9')
 			num = num * 10 + s[i++] - '0';
-	}
+	if (f == WIDTH && num < 0)
+		flags->minus = 1;
+	else if (f == PRECISION && num < 0)
+		num = PRECISION_MINUS;
 	if (f == WIDTH)
-		flags->width = num;
+		flags->width = ABS(num);
 	else if (f == PRECISION)
 		flags->precision = num;
 	return (i);

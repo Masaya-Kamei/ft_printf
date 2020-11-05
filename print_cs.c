@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:09:21 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 16:10:54 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/05 18:14:43 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	print_s(va_list ap, t_flags flags)
 
 	str = va_arg(ap, char *);
 	str_len = (str == NULL) ? 6 : ft_strlen(str);
-	if (str_len > flags.precision && flags.precision != -1)
+	if (str_len > flags.precision && flags.precision != PRECISION_OFF && flags.precision != PRECISION_MINUS)
 		str_len = flags.precision;
 	len = 0;
 	if (flags.minus == 0 && flags.width > str_len)

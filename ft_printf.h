@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:53:21 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 15:40:34 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/05 18:11:05 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define ALPHA_SIZE_LARGE 2
 # define PERCENT_OFF 0
 # define PERCENT_ON 1
+# define PRECISION_OFF -1
+# define PRECISION_MINUS -2
 # define ABS(x) ((x) < 0 ? -(x) : (x))
 
 # include <stdarg.h>
