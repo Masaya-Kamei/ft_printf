@@ -6,78 +6,123 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:54:29 by mkamei            #+#    #+#             */
-/*   Updated: 2020/10/29 18:47:19 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/05 15:38:26 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-#include <stdio.h>
-
-
-void		ft_putnbr_unsigned_fd(unsigned int n, int fd)
+static int	check_minus_and_zero(const char *s, t_flags *flags)
 {
-	if (n >= 10)
-		ft_putnbr_unsigned_fd(n / 10, fd);
-	ft_putchar_fd(n % 10 + '0', fd);
-}
+	int i;
 
-void		ft_puthex_fd(long n, int fd, int flag)
-{
-	if (n >= 16)
-		ft_puthex_fd(n / 16, fd, flag);
-	else
-	{
-		if (flag == HEX_PREFIX)
-			ft_putstr_fd("0x", fd);
-	}
-	if (n % 16 >= 10)
-	{
-		if (flag == HEX_LARGE)
-			ft_putchar_fd(n % 16 + '0' + 7, fd);
-		else
-			ft_putchar_fd(n % 16 + '0' + 39, fd);
-	}
-	else
-		ft_putchar_fd(n % 16 + '0', fd);
-}
-
-
-int		ft_printf(const char *s, ...)
-{
-	va_list list;
-	int		i;
-
-	va_start(list, s);
+	flags->minus = 0;
+	flags->zero = 0;
 	i = 0;
+	while (s[i] == '-' || s[i] == '0')
+	{
+		if (s[i] == '-')
+			flags->minus = 1;
+		else
+			flags->zero = 1;
+		i++;
+	}
+	return (i);
+}
+
+static int	check_digit(const char *s, t_flags *flags, va_list ap, int f)
+{
+	int i;
+	int num;
+
+	i = 0;
+	if (f == PRECISION && s[i++] != '.')
+	{
+		flags->precision = -1;
+		return (0);
+	}
+	num = 0;
+	if (s[i] == '*')
+	{
+		num = va_arg(ap, int);
+		i++;
+	}
+	else
+	{
+		while (s[i] >= '0' && s[i] <= '9')
+			num = num * 10 + s[i++] - '0';
+	}
+	if (f == WIDTH)
+		flags->width = num;
+	else if (f == PRECISION)
+		flags->precision = num;
+	return (i);
+}
+
+static int	check_type(const char *s, t_flags *flags)
+{
+	int i;
+
+	i = 0;
+	flags->type = 'a';
+	while (s[i] != '\0')
+	{
+		if (s[i] == 'c' || s[i] == 's' || s[i] == 'p' ||
+			s[i] == 'd' || s[i] == 'i' || s[i] == 'u' ||
+			s[i] == 'x' || s[i] == 'X' || s[i] == '%')
+		{
+			flags->type = s[i];
+			i++;
+			break ;
+		}
+		i++;
+	}
+	return (i);
+}
+
+static int	printing(va_list ap, t_flags flags)
+{
+	int len;
+
+	if (flags.type == 'c')
+		len = print_c(ap, flags, PERCENT_OFF);
+	else if (flags.type == '%')
+		len = print_c(ap, flags, PERCENT_ON);
+	else if (flags.type == 's')
+		len = print_s(ap, flags);
+	else if (flags.type == 'p' || flags.type == 'd' || flags.type == 'i' ||
+			flags.type == 'u' || flags.type == 'x' || flags.type == 'X')
+		len = print_pdiux(ap, flags);
+	else
+		len = 0;
+	return (len);
+}
+
+int			ft_printf(const char *s, ...)
+{
+	va_list ap;
+	t_flags flags;
+	int		i;
+	int		ret;
+
+	va_start(ap, s);
+	i = 0;
+	ret = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == '%')
 		{
 			i++;
-			if (s[i] == 'c')
-				ft_putchar_fd(va_arg(list, int), 1);
-			else if (s[i] == 's')
-				ft_putstr_fd(va_arg(list, char *), 1);
-			else if (s[i] == 'p')
-				ft_puthex_fd((long)va_arg(list, void *), 1, HEX_PREFIX);
-			else if (s[i] == 'd' || s[i] == 'i')
-				ft_putnbr_fd(va_arg(list, int), 1);
-			else if (s[i] == 'u')
-				ft_putnbr_unsigned_fd(va_arg(list, int), 1);
-			else if (s[i] == 'x')
-				ft_puthex_fd(va_arg(list, int), 1, HEX_SMALL);
-			else if (s[i] == 'X')
-				ft_puthex_fd(va_arg(list, int), 1, HEX_LARGE);
-			else if (s[i] == '%')
-				ft_putchar_fd('%', 1);
+			i += check_minus_and_zero(&s[i], &flags);
+			i += check_digit(&s[i], &flags, ap, WIDTH);
+			i += check_digit(&s[i], &flags, ap, PRECISION);
+			i += check_type(&s[i], &flags);
+			// printf("minus :%d, zero :%d, width :%d, pre :%d, type :%c\n", flags.minus, flags.zero, flags.width, flags.precision, flags.type);
+			ret += printing(ap, flags);
 		}
 		else
-			ft_putchar_fd(s[i], 1);
-		i++;
+			ret += write(1, &s[i++], 1);
 	}
-
-	va_end(list);
-	return (0);
+	va_end(ap);
+	return (ret);
 }
