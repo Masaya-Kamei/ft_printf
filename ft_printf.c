@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:54:29 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 20:09:38 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/06 10:46:53 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	check_digit(const char *s, t_flags *flags, va_list ap, int f)
 	if (f == WIDTH && num < 0)
 		flags->minus = 1;
 	if (f == WIDTH)
-		flags->width = (int)ft_abs(num);
+		flags->width = (num < 0) ? -num : num;
 	else if (f == PRECISION)
 		flags->precision = (num < 0) ? PRECISION_OFF : num;
 	return (i);

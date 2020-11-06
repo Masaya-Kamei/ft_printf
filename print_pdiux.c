@@ -6,13 +6,13 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 14:20:28 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/06 10:08:51 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/06 11:19:46 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	count_digit_base(long n, int base_num)
+static int	count_digit_base(unsigned long n, int base_num)
 {
 	int		n_len;
 
@@ -27,12 +27,12 @@ static int	count_digit_base(long n, int base_num)
 	return (n_len);
 }
 
-static int	putnbr_base(long n, int base_num, int alpha_size)
+static int	putnbr_base(unsigned long n, int base_num, int alpha_size)
 {
 	char		c;
 	static int	len;
 
-	if (n >= base_num)
+	if (n >= (unsigned long)base_num)
 		putnbr_base(n / base_num, base_num, alpha_size);
 	else
 		len = 0;
@@ -49,14 +49,15 @@ static int	putnbr_base(long n, int base_num, int alpha_size)
 	return (len);
 }
 
-static int	putnbr_with_zero(long n, int n_len, int prefix_len, t_flags flags)
+static int	putnbr_with_zero(unsigned long n, int n_len,
+											int prefix_len, t_flags flags)
 {
 	int len;
 
 	len = 0;
-	if (flags.type == 'p')
+	if (prefix_len == 2)
 		len += write(1, "0x", 2);
-	else if (n < 0)
+	else if (prefix_len == 1)
 		len += write(1, "-", 1);
 	if (flags.zero == 1 && flags.minus == 0 && flags.precision == PRECISION_OFF
 										&& n_len + prefix_len < flags.width)
@@ -66,7 +67,7 @@ static int	putnbr_with_zero(long n, int n_len, int prefix_len, t_flags flags)
 	if (n == 0 && flags.precision == 0)
 		return (len);
 	if (flags.type == 'd' || flags.type == 'i' || flags.type == 'u')
-		len += putnbr_base(ft_abs(n), 10, 0);
+		len += putnbr_base(n, 10, 0);
 	else if (flags.type == 'p' || flags.type == 'x')
 		len += putnbr_base(n, 16, ALPHA_SIZE_SMALL);
 	else if (flags.type == 'X')
@@ -74,14 +75,15 @@ static int	putnbr_with_zero(long n, int n_len, int prefix_len, t_flags flags)
 	return (len);
 }
 
-static int	putnbr_with_flags(long n, int n_len, int prefix_len, t_flags flags)
+static int	putnbr_with_flags(unsigned long n, int n_len,
+											int prefix_len, t_flags flags)
 {
 	int len;
 
 	len = 0;
 	if (flags.minus == 0)
 	{
-		if (n_len < flags.precision && flags.precision < flags.width)
+		if (n_len < flags.precision && flags.precision + prefix_len < flags.width)
 			len += putchar_num(' ', flags.width - flags.precision - prefix_len);
 		else if (n_len >= flags.precision && n_len + prefix_len < flags.width)
 		{
@@ -92,7 +94,7 @@ static int	putnbr_with_flags(long n, int n_len, int prefix_len, t_flags flags)
 	len += putnbr_with_zero(n, n_len, prefix_len, flags);
 	if (flags.minus == 1)
 	{
-		if (n_len < flags.precision && flags.precision < flags.width)
+		if (n_len < flags.precision && flags.precision + prefix_len < flags.width)
 			len += putchar_num(' ', flags.width - flags.precision - prefix_len);
 		else if (n_len >= flags.precision && n_len + prefix_len < flags.width)
 			len += putchar_num(' ', flags.width - n_len - prefix_len);
@@ -102,24 +104,28 @@ static int	putnbr_with_flags(long n, int n_len, int prefix_len, t_flags flags)
 
 int			print_pdiux(va_list ap, t_flags flags)
 {
-	long	n;
-	int		n_len;
-	int		prefix_len;
+	unsigned long	n;
+	long			l;
+	int				n_len;
+	int				prefix_len;
 
 	if (flags.type == 'p')
-		n = (long)va_arg(ap, void *);
+		n = (unsigned long)va_arg(ap, void *);
 	else if (flags.type == 'd' || flags.type == 'i')
-		n = va_arg(ap, int);
+	{
+		l = va_arg(ap, int);
+		n = (l < 0) ? -l : l;
+	}
 	else
 		n = va_arg(ap, unsigned int);
-	if (flags.type == 'p')
-		prefix_len = 2;
+	if (flags.type == 'd' || flags.type == 'i')
+		prefix_len = (l < 0) ? 1 : 0;
 	else
-		prefix_len = (n < 0) ? 1 : 0;
+		prefix_len = (flags.type == 'p') ? 2 : 0;
 	if (n == 0 && flags.precision == 0)
 		n_len = 0;
 	else if (flags.type == 'd' || flags.type == 'i' || flags.type == 'u')
-		n_len = count_digit_base(ft_abs(n), 10);
+		n_len = count_digit_base(n, 10);
 	else
 		n_len = count_digit_base(n, 16);
 	return (putnbr_with_flags(n, n_len, prefix_len, flags));

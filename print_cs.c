@@ -6,19 +6,11 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:09:21 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 19:58:16 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/06 10:34:13 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-long	ft_abs(long n)
-{
-	if (n < 0)
-		return (-1 * n);
-	else
-		return (n);
-}
 
 int		putchar_num(char c, int num)
 {
