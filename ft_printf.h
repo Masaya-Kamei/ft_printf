@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:53:21 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 18:11:05 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/05 19:54:53 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,24 @@
 # define PERCENT_OFF 0
 # define PERCENT_ON 1
 # define PRECISION_OFF -1
-# define PRECISION_MINUS -2
-# define ABS(x) ((x) < 0 ? -(x) : (x))
 
 # include <stdarg.h>
 # include "libft/libft.h"
 
-
-#include <stdio.h>
 typedef struct	s_flags
 {
-	int 		minus;
+	int			minus;
 	int			zero;
-	int 		width;
-	int 		precision;
-	char 		type;
+	int			width;
+	int			precision;
+	char		type;
 }				t_flags;
 
 int				ft_printf(const char *argv, ...);
+long			ft_abs(long n);
 int				putchar_num(char c, int num);
-int 			print_c(va_list ap, t_flags flags, int percent);
-int 			print_s(va_list ap, t_flags flags);
-int 			print_pdiux(va_list ap, t_flags flags);
+int				print_c(va_list ap, t_flags flags, int percent);
+int				print_s(va_list ap, t_flags flags);
+int				print_pdiux(va_list ap, t_flags flags);
 
-
-# endif
+#endif

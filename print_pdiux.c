@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 14:20:28 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 19:02:26 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/06 10:08:51 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	putnbr_base(long n, int base_num, int alpha_size)
 	return (len);
 }
 
-static int	putnbr_with_precision(long n, int n_len, int prefix_len, t_flags flags)
+static int	putnbr_with_zero(long n, int n_len, int prefix_len, t_flags flags)
 {
 	int len;
 
@@ -58,15 +58,15 @@ static int	putnbr_with_precision(long n, int n_len, int prefix_len, t_flags flag
 		len += write(1, "0x", 2);
 	else if (n < 0)
 		len += write(1, "-", 1);
-	if (flags.zero == 1 && flags.minus == 0 && n_len + prefix_len < flags.width &&
-			(flags.precision == PRECISION_OFF || flags.precision == PRECISION_MINUS))
+	if (flags.zero == 1 && flags.minus == 0 && flags.precision == PRECISION_OFF
+										&& n_len + prefix_len < flags.width)
 		len += putchar_num('0', flags.width - n_len - prefix_len);
 	else if (n_len < flags.precision)
 		len += putchar_num('0', flags.precision - n_len);
 	if (n == 0 && flags.precision == 0)
 		return (len);
 	if (flags.type == 'd' || flags.type == 'i' || flags.type == 'u')
-		len += putnbr_base(ABS(n), 10, 0);
+		len += putnbr_base(ft_abs(n), 10, 0);
 	else if (flags.type == 'p' || flags.type == 'x')
 		len += putnbr_base(n, 16, ALPHA_SIZE_SMALL);
 	else if (flags.type == 'X')
@@ -85,11 +85,11 @@ static int	putnbr_with_flags(long n, int n_len, int prefix_len, t_flags flags)
 			len += putchar_num(' ', flags.width - flags.precision - prefix_len);
 		else if (n_len >= flags.precision && n_len + prefix_len < flags.width)
 		{
-			if (flags.zero == 0 || (flags.precision != PRECISION_OFF && flags.precision != PRECISION_MINUS))
+			if (flags.zero == 0 || flags.precision != PRECISION_OFF)
 				len += putchar_num(' ', flags.width - n_len - prefix_len);
 		}
 	}
-	len += putnbr_with_precision(n, n_len, prefix_len, flags);
+	len += putnbr_with_zero(n, n_len, prefix_len, flags);
 	if (flags.minus == 1)
 	{
 		if (n_len < flags.precision && flags.precision < flags.width)
@@ -119,10 +119,8 @@ int			print_pdiux(va_list ap, t_flags flags)
 	if (n == 0 && flags.precision == 0)
 		n_len = 0;
 	else if (flags.type == 'd' || flags.type == 'i' || flags.type == 'u')
-		n_len = count_digit_base(ABS(n), 10);
+		n_len = count_digit_base(ft_abs(n), 10);
 	else
 		n_len = count_digit_base(n, 16);
-	// if (flags.precision == PRECISION_MINUS)
-	// 	flags.precision = n_len;
 	return (putnbr_with_flags(n, n_len, prefix_len, flags));
 }

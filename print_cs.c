@@ -6,13 +6,21 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:09:21 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/05 18:14:43 by mkamei           ###   ########.fr       */
+/*   Updated: 2020/11/05 19:58:16 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	putchar_num(char c, int num)
+long	ft_abs(long n)
+{
+	if (n < 0)
+		return (-1 * n);
+	else
+		return (n);
+}
+
+int		putchar_num(char c, int num)
 {
 	int i;
 
@@ -25,7 +33,7 @@ int	putchar_num(char c, int num)
 	return (i);
 }
 
-int	print_c(va_list ap, t_flags flags, int percent)
+int		print_c(va_list ap, t_flags flags, int percent)
 {
 	char	c;
 	int		len;
@@ -48,7 +56,7 @@ int	print_c(va_list ap, t_flags flags, int percent)
 	return (len);
 }
 
-int	print_s(va_list ap, t_flags flags)
+int		print_s(va_list ap, t_flags flags)
 {
 	char	*str;
 	int		str_len;
@@ -56,7 +64,7 @@ int	print_s(va_list ap, t_flags flags)
 
 	str = va_arg(ap, char *);
 	str_len = (str == NULL) ? 6 : ft_strlen(str);
-	if (str_len > flags.precision && flags.precision != PRECISION_OFF && flags.precision != PRECISION_MINUS)
+	if (str_len > flags.precision && flags.precision != PRECISION_OFF)
 		str_len = flags.precision;
 	len = 0;
 	if (flags.minus == 0 && flags.width > str_len)
