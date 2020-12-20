@@ -52,7 +52,7 @@ INCLUDE	= -I./
 NAME	= libft.a
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-AR		= AR
+AR		= ar
 ARFLAGS	= rc
 RM		= rm -f
 
