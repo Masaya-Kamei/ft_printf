@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:53:21 by mkamei            #+#    #+#             */
-/*   Updated: 2020/11/06 12:19:04 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/16 13:31:13 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define PUT_ZERO_SO_SKIP -1
 
 # include <stdarg.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 typedef struct	s_flags
 {

@@ -6,3 +6,4 @@ a.out*
 libft.a*
 objs
 *.o
+libftprintf.a*

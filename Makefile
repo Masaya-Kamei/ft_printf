@@ -1,34 +1,59 @@
-SRCS	= ./ft_printf.c ./print_cs.c ./print_pdiux.c
-OBJS	= $(SRCS:.c=.o)
-INCLUDE	= -I./
-NAME	= libftprintf.a
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-RM		= rm -f
-LIBDIR	= ./libft/
-LIBNAME = libft.a
-LIB		= ./libft/libft.a
+SRCSDIR	=	.
+SRCSNAME=	ft_printf.c print_cs.c print_pdiux.c
+SRCS	=	$(addprefix $(SRCSDIR)/, $(SRCSNAME))
+
+OBJSDIR	=	./objs
+OBJSNAME=	$(SRCSNAME:.c=.o)
+OBJS	=	$(addprefix $(OBJSDIR)/, $(OBJSNAME))
+
+INCLUDE	=	-I./
+NAME	=	libftprintf.a
+
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror
+AR		=	ar rc
+RM		=	rm -f
+
+LIBFTDIR    := ./libft
+LIBFTTARGET	:= all
+LIBFT		:= ./libft/libft.a
+
+LIBINCLUDEDIR	:= -I./libft
+LIBDIR      	:= -L${LIBFTDIR}
+LIBLINK			:= -lft
+LIB				:= $(LIBINCLUDEDIR) $(LIBDIR) $(LIBLINK)
 
 all		:	$(NAME)
 
-.c.o	:
-			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:.c=.o)
+$(NAME)	:	$(LIBFT) $(OBJS)
+			cp $(LIBFT) $(NAME)
+			$(AR) $(NAME) $(OBJS)
 
-$(NAME)	:	$(LIBNAME) $(OBJS)
-			cp $(LIB) $(NAME)
-			ar rc $(NAME) $(OBJS)
+$(OBJSDIR)/%.o	:	$(SRCSDIR)/%.c
+			@mkdir -p $(dir $@)
+			$(CC) $(CFLAGS) $(INCLUDE) $(LIBINCLUDEDIR) -o $@ -c $<
 
-$(LIBNAME):
-			make -C $(LIBDIR)
+$(LIBFT):
+			make -C $(LIBFTDIR) $(LIBFTTARGET)
 
 clean	:
 			$(RM) $(OBJS)
-			make clean -C $(LIBDIR)
+			make -C $(LIBFTDIR) clean
 
 fclean	:	clean
 			$(RM) $(NAME)
-			make fclean -C $(LIBDIR)
+			make -C $(LIBFTDIR) fclean
 
 re		:	fclean all
 
-.PHONY	:	all clean fclean re
+address	:	LIBFTTARGET	=	address
+address	:	CC			=	clang
+address	:	CFLAGS 		+= 	-g -fsanitize=address
+address	:	re
+
+leak	:	LIBFTTARGET	=	leak
+leak	:	CC			=	clang
+leak	:	CFLAGS		+= 	-g -fsanitize=leak
+leak	:	re
+
+.PHONY	:	all clean fclean re address leak
