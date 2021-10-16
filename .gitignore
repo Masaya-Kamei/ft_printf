@@ -1,0 +1,8 @@
+pft_2019/
+printf-tester/
+42TESTERS-PRINTF/
+main.c
+a.out*
+libft.a*
+objs
+*.o
