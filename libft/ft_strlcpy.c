@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:12:00 by mkamei            #+#    #+#             */
-/*   Updated: 2020/10/24 13:41:09 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/05/27 18:38:52 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t i;
-	size_t src_len;
+	size_t	i;
+	size_t	src_len;
 
 	src_len = ft_strlen(src);
 	if (size == 0)

@@ -6,13 +6,13 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 18:14:01 by mkamei            #+#    #+#             */
-/*   Updated: 2020/10/24 13:43:29 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/04 18:06:42 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_str_count(char const *s, char c)
+static int	get_splited_str_count(char const *s, char c)
 {
 	int		i;
 	int		count;
@@ -33,51 +33,42 @@ static int	get_str_count(char const *s, char c)
 	return (count);
 }
 
-static void	*release(char **strs, int strs_index)
+static void	*split_release_handling(char **strs)
 {
-	int i;
+	int		i;
 
-	i = 0;
-	while (i < strs_index)
-		free(strs[i++]);
+	i = -1;
+	while (strs[++i])
+		free(strs[i]);
 	free(strs);
 	return (NULL);
 }
 
-static char	**split_str(const char *s, char c, char **strs)
+char	**ft_split(char const *s, char c)
 {
+	char	**strs;
 	int		i;
 	int		len;
 	int		strs_index;
 
-	i = 0;
-	strs_index = 0;
-	while (s[i] != '\0')
+	strs = (char **)malloc((get_splited_str_count(s, c) + 1) * sizeof(char *));
+	if (strs == NULL)
+		return (NULL);
+	i = -1;
+	strs_index = -1;
+	while (s[++i] != '\0')
 	{
 		if (s[i] != c)
 		{
 			len = 0;
 			while (s[i + len] != c && s[i + len] != '\0')
 				len++;
-			if (!(strs[strs_index] = (char *)malloc((len + 1) * sizeof(char))))
-				return (release(strs, strs_index));
-			ft_strlcpy(strs[strs_index++], &s[i], len + 1);
-			i += len;
+			strs[++strs_index] = ft_substr(s, i, len);
+			if (strs[strs_index] == NULL)
+				return (split_release_handling(strs));
+			i += len - 1;
 		}
-		else
-			i++;
 	}
-	strs[strs_index] = NULL;
-	return (strs);
-}
-
-char		**ft_split(char const *s, char c)
-{
-	char	**strs;
-
-	if (!(strs = (char **)malloc((get_str_count(s, c) + 1) * sizeof(char *))))
-		return (NULL);
-	if (!(strs = split_str(s, c, strs)))
-		return (NULL);
+	strs[++strs_index] = NULL;
 	return (strs);
 }

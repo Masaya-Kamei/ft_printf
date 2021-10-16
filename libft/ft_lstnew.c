@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 12:52:15 by mkamei            #+#    #+#             */
-/*   Updated: 2020/10/11 14:11:25 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/05/27 18:30:39 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list *lst;
+	t_list	*lst;
 
-	if (!(lst = (t_list *)malloc(sizeof(t_list))))
+	lst = (t_list *)malloc(sizeof(t_list));
+	if (lst == NULL)
 		return (NULL);
 	lst->content = content;
 	lst->next = NULL;

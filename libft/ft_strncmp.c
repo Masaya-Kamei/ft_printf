@@ -6,15 +6,15 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 15:48:30 by mkamei            #+#    #+#             */
-/*   Updated: 2020/10/18 15:20:00 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/05/27 18:38:07 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	if (n == 0)
 		return (0);

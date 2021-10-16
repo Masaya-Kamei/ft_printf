@@ -6,16 +6,13 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 18:51:49 by mkamei            #+#    #+#             */
-/*   Updated: 2020/10/07 18:53:11 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/04 12:47:12 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	return (c >= 32 && c <= 126);
 }
