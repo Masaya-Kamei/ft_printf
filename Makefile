@@ -1,12 +1,12 @@
-SRCSDIR	=	.
-SRCSNAME=	ft_printf.c print_cs.c print_pdiux.c
+SRCSNAME=	ft_printf.c read_flag.c print_chars.c print_pdiux.c utils/put.c
+SRCSDIR	=	./srcs
 SRCS	=	$(addprefix $(SRCSDIR)/, $(SRCSNAME))
 
-OBJSDIR	=	./objs
 OBJSNAME=	$(SRCSNAME:.c=.o)
+OBJSDIR	=	./objs
 OBJS	=	$(addprefix $(OBJSDIR)/, $(OBJSNAME))
 
-INCLUDE	=	-I./
+INCLUDE	=	-I./includes
 NAME	=	libftprintf.a
 
 CC		=	gcc
