@@ -6,14 +6,13 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:09:21 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 12:36:47 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:07:34 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	print_chars_framework(
-	const t_flag flag, const char *str, const int str_len)
+static int	print_chars(const t_flag flag, const char *str, const int str_len)
 {
 	int		put_len;
 
@@ -33,7 +32,7 @@ int	print_char(const t_flag flag, va_list ap)
 		c = '%';
 	else
 		c = va_arg(ap, int);
-	return (print_chars_framework(flag, &c, str_len));
+	return (print_chars(flag, &c, str_len));
 }
 
 int	print_str(const t_flag flag, va_list ap)
@@ -47,5 +46,5 @@ int	print_str(const t_flag flag, va_list ap)
 	str_len = ft_strlen(str);
 	if (flag.precision != PRECISION_OFF && str_len > flag.precision)
 		str_len = flag.precision;
-	return (print_chars_framework(flag, str, str_len));
+	return (print_chars(flag, str, str_len));
 }

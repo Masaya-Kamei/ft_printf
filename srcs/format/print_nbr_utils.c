@@ -6,13 +6,14 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:57:38 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 12:24:22 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:03:21 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	count_ulong_digit_in_base(t_flag flag, unsigned long n, int base)
+int	count_ulong_digit_in_base(
+	const t_flag flag, unsigned long n, const int base)
 {
 	int		n_len;
 
@@ -32,7 +33,8 @@ int	count_ulong_digit_in_base(t_flag flag, unsigned long n, int base)
 	return (n_len);
 }
 
-static int	rec_print_ulong_in_base(t_flag flag, unsigned long n, int base)
+static int	rec_print_ulong_in_base(
+	const t_flag flag, const unsigned long n, const int base)
 {
 	char	c;
 	int		put_len;
@@ -53,7 +55,8 @@ static int	rec_print_ulong_in_base(t_flag flag, unsigned long n, int base)
 	return (put_len);
 }
 
-int	print_ulong_in_base(t_flag flag, unsigned long n, int base)
+int	print_ulong_in_base(
+	const t_flag flag, const unsigned long n, const int base)
 {
 	int		put_len;
 

@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:57:02 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 14:23:39 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:04:27 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	putchar_for_size(const char c, const int size)
 	return (put_len);
 }
 
-int	get_symbol_len(t_nbr_symbol symbol)
+int	get_symbol_len(const t_nbr_symbol symbol)
 {
 	int		symbol_len;
 
@@ -38,13 +38,13 @@ int	get_symbol_len(t_nbr_symbol symbol)
 	return (symbol_len);
 }
 
-bool	is_nbr_format(t_format_type type)
+bool	is_nbr_format(const t_format_type type)
 {
 	return (type == 'i' || type == 'd' || type == 'x'
 		|| type == 'X' || type == 'u' || type == 'p');
 }
 
-bool	is_chars_format(t_format_type type)
+bool	is_chars_format(const t_format_type type)
 {
 	return (type == 'c' || type == 's' || type == '%');
 }

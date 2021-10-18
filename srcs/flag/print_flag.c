@@ -6,13 +6,13 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 17:31:00 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 14:14:29 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:06:24 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	print_nbr_symbol(t_nbr_symbol symbol)
+static int	print_nbr_symbol(const t_nbr_symbol symbol)
 {
 	int		put_len;
 
@@ -25,7 +25,8 @@ static int	print_nbr_symbol(t_nbr_symbol symbol)
 	return (put_len);
 }
 
-static int	print_width(t_flag flag, int len, t_nbr_symbol symbol, char c)
+static int	print_width(
+	const t_flag flag, int len, const t_nbr_symbol symbol, const char c)
 {
 	int		put_len;
 
@@ -39,7 +40,8 @@ static int	print_width(t_flag flag, int len, t_nbr_symbol symbol, char c)
 	return (put_len);
 }
 
-int	print_prefix_width_with_symbol(t_flag flag, int len, t_nbr_symbol symbol)
+int	print_prefix_width_with_symbol(
+	const t_flag flag, const int len, const t_nbr_symbol symbol)
 {
 	int		put_len;
 
@@ -62,7 +64,8 @@ int	print_prefix_width_with_symbol(t_flag flag, int len, t_nbr_symbol symbol)
 	return (put_len);
 }
 
-int	print_suffix_width(t_flag flag, int len, t_nbr_symbol symbol)
+int	print_suffix_width(
+	const t_flag flag, const int len, const t_nbr_symbol symbol)
 {
 	int		put_len;
 
@@ -73,7 +76,7 @@ int	print_suffix_width(t_flag flag, int len, t_nbr_symbol symbol)
 	return (put_len);
 }
 
-int	print_precision(t_flag flag, int len)
+int	print_precision(const t_flag flag, const int len)
 {
 	int		put_len;
 

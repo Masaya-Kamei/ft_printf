@@ -6,16 +6,14 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 19:51:28 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 12:53:34 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:08:12 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// flag, base, n, symbol
-
-static int	print_nbr_framework(
-	const t_flag flag, unsigned long n, int base, t_nbr_symbol symbol)
+static int	print_nbr(const t_flag flag
+	, const unsigned long n, const int base, const t_nbr_symbol symbol)
 {
 	const int	n_len = count_ulong_digit_in_base(flag, n, base);
 	int			put_len;
@@ -42,7 +40,7 @@ int	print_int(const t_flag flag, va_list ap)
 	}
 	else
 		symbol = NO_SYMBOL;
-	return (print_nbr_framework(flag, n, base, symbol));
+	return (print_nbr(flag, n, base, symbol));
 }
 
 int	print_uint(const t_flag flag, va_list ap)
@@ -51,7 +49,7 @@ int	print_uint(const t_flag flag, va_list ap)
 	const int			base = 10;
 	const t_nbr_symbol	symbol = NO_SYMBOL;
 
-	return (print_nbr_framework(flag, n, base, symbol));
+	return (print_nbr(flag, n, base, symbol));
 }
 
 int	print_hex(const t_flag flag, va_list ap)
@@ -60,7 +58,7 @@ int	print_hex(const t_flag flag, va_list ap)
 	const int			base = 16;
 	const t_nbr_symbol	symbol = NO_SYMBOL;
 
-	return (print_nbr_framework(flag, n, base, symbol));
+	return (print_nbr(flag, n, base, symbol));
 }
 
 int	print_pointer(const t_flag flag, va_list ap)
@@ -69,5 +67,5 @@ int	print_pointer(const t_flag flag, va_list ap)
 	const int			base = 16;
 	const t_nbr_symbol	symbol = HEX;
 
-	return (print_nbr_framework(flag, n, base, symbol));
+	return (print_nbr(flag, n, base, symbol));
 }

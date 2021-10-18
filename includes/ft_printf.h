@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:53:21 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 14:29:57 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:08:59 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ int		read_precision(const char *s, t_flag *flag, va_list ap);
 int		read_format_type(const char *s, t_flag *flag);
 
 // print_flag
-int		print_prefix_width_with_symbol(t_flag flag, int len, t_nbr_symbol symbol);
-int		print_suffix_width(t_flag flag, int len, t_nbr_symbol symbol);
-int		print_precision(t_flag flag, int len);
+int		print_prefix_width_with_symbol(
+			const t_flag flag, const int len, const t_nbr_symbol symbol);
+int		print_suffix_width(
+			const t_flag flag, const int len, const t_nbr_symbol symbol);
+int		print_precision(const t_flag flag, const int len);
 
 // print_format
 int		print_char(const t_flag flag, va_list ap);
@@ -72,10 +74,12 @@ int		print_hex(const t_flag flag, va_list ap);
 
 // utils
 int		putchar_for_size(const char c, const int size);
-int		get_symbol_len(t_nbr_symbol symbol);
-bool	is_nbr_format(t_format_type type);
-bool	is_chars_format(t_format_type type);
-int		count_ulong_digit_in_base(t_flag flag, unsigned long n, int base);
-int		print_ulong_in_base(t_flag flag, unsigned long n, int base);
+int		get_symbol_len(const t_nbr_symbol symbol);
+bool	is_nbr_format(const t_format_type type);
+bool	is_chars_format(const t_format_type type);
+int		count_ulong_digit_in_base(
+			const t_flag flag, unsigned long n, const int base);
+int		print_ulong_in_base(
+			const t_flag flag, const unsigned long n, const int base);
 
 #endif
