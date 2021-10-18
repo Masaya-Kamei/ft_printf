@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:19:02 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/16 18:16:31 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/17 18:47:44 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	read_precision(const char *s, t_flag *flag, va_list ap)
 	return (i);
 }
 
-int	read_type(const char *s, t_flag *flag)
+int	read_format_type(const char *s, t_flag *flag)
 {
 	int		i;
 

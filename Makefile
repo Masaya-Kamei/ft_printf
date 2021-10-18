@@ -1,4 +1,6 @@
-SRCSNAME=	ft_printf.c read_flag.c print_chars.c print_pdiux.c utils/put.c
+SRCSNAME=	ft_printf.c \
+			flag/read_flag.c flag/print_flag.c flag/print_flag_utils.c \
+			format/print_chars.c format/print_nbr.c format/print_nbr_utils.c
 SRCSDIR	=	./srcs
 SRCS	=	$(addprefix $(SRCSDIR)/, $(SRCSNAME))
 
