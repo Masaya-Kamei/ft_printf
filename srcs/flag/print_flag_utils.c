@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:57:02 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 17:04:27 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:10:38 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	putchar_for_size(const char c, const int size)
 	put_len = 0;
 	while (put_len < size)
 	{
-		write(1, &c, 1);
+		write(STDOUT_FILENO, &c, 1);
 		put_len++;
 	}
 	return (put_len);

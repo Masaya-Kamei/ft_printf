@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:09:21 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 17:07:34 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:10:53 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	print_chars(const t_flag flag, const char *str, const int str_len)
 
 	put_len = 0;
 	put_len += print_prefix_width_with_symbol(flag, str_len, NO_SYMBOL);
-	put_len += write(1, str, str_len);
+	put_len += write(STDOUT_FILENO, str, str_len);
 	put_len += print_suffix_width(flag, str_len, NO_SYMBOL);
 	return (put_len);
 }

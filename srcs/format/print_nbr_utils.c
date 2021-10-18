@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:57:38 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 17:03:21 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:11:17 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	rec_print_ulong_in_base(
 	}
 	else
 		c = n % base + '0';
-	put_len += write(1, &c, 1);
+	put_len += write(STDOUT_FILENO, &c, 1);
 	return (put_len);
 }
 
@@ -65,7 +65,7 @@ int	print_ulong_in_base(
 		if (flag.precision == 0)
 			put_len = 0;
 		else
-			put_len = write(1, "0", 1);
+			put_len = write(STDOUT_FILENO, "0", 1);
 	}
 	else
 		put_len = rec_print_ulong_in_base(flag, n, base);

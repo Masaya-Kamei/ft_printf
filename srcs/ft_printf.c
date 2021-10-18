@@ -6,7 +6,7 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:54:29 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 14:37:23 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:11:28 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_printf(const char *s, ...)
 			put_len += print_format(flag, ap);
 		}
 		else
-			put_len += write(1, &s[i++], 1);
+			put_len += write(STDOUT_FILENO, &s[i++], 1);
 	}
 	va_end(ap);
 	return (put_len);
