@@ -6,11 +6,11 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 19:51:28 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 17:08:12 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 20:00:20 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ftprintf_develop.h"
 
 static int	print_nbr(const t_flag flag
 	, const unsigned long n, const int base, const t_nbr_symbol symbol)

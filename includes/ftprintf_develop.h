@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ftprintf_develop.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 13:53:21 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 17:08:59 by mkamei           ###   ########.fr       */
+/*   Created: 2021/10/18 19:57:08 by mkamei            #+#    #+#             */
+/*   Updated: 2021/10/18 20:04:10 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FTPRINTF_DEVELOP_H
+# define FTPRINTF_DEVELOP_H
 
 # define PRECISION_OFF -1
 
 # include <stdarg.h>
 # include <stdbool.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include "libft.h"
 
 typedef enum s_format_type
@@ -47,9 +49,6 @@ typedef struct s_flag
 	int				precision;
 	t_format_type	type;
 }					t_flag;
-
-// main
-int		ft_printf(const char *argv, ...);
 
 // read_flag
 int		read_minus_and_zero(const char *s, t_flag *flag);

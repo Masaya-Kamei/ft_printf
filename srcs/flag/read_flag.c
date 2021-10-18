@@ -6,11 +6,11 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:19:02 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/17 18:47:44 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 20:00:01 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ftprintf_develop.h"
 
 int	read_minus_and_zero(const char *s, t_flag *flag)
 {

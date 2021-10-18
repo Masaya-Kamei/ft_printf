@@ -6,11 +6,11 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 20:57:02 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/18 17:10:38 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/18 20:01:17 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ftprintf_develop.h"
 
 int	putchar_for_size(const char c, const int size)
 {
