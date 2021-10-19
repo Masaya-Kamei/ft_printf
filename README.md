@@ -1,6 +1,8 @@
 # 42 ft_printf
 
-Recode printf
+`int ft_printf(const char *argv, ...);`
+
+Recode printf.
 
 - Conversions
   - c- char
