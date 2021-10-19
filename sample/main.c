@@ -6,12 +6,15 @@
 /*   By: mkamei <mkamei@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:27:44 by mkamei            #+#    #+#             */
-/*   Updated: 2021/10/19 12:28:09 by mkamei           ###   ########.fr       */
+/*   Updated: 2021/10/19 13:00:37 by mkamei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ftprintf.h"
 #include <stdio.h>
+
+// Conversions	:c s p d i u x X %
+// Flags 		:0 * width precision
 
 int main(void)
 {
