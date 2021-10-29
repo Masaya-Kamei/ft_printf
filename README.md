@@ -23,7 +23,7 @@ Recode printf.
 ## Usage example
 
 ```zsh
-git clone https://github.com/Masaya-Kamei/ft_printf.git;
+git clone https://github.com/Masaya-Kamei/ft_printf.git --recursive;
 cd ft_printf/sample;
 ./run_sample.sh;
 ```
