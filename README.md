@@ -22,9 +22,11 @@ Recode printf.
 
 ## Usage example
 
-1. `git clone https://github.com/Masaya-Kamei/ft_printf.git`
-2. `cd ft_printf/sample`
-3. `./run_sample.sh`
+```zsh
+git clone https://github.com/Masaya-Kamei/ft_printf.git
+cd ft_printf/sample
+./run_sample.sh
+```
 
 ## Tool
 

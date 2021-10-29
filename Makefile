@@ -48,6 +48,9 @@ fclean	:	clean
 
 re		:	fclean all
 
+# Use llvm clang
+# For Macos, https://stackoverflow.com/questions/53456304/mac-os-leaks-sanitizer
+
 address	:	LIBFTTARGET	=	address
 address	:	CC			=	clang
 address	:	CFLAGS 		+= 	-g -fsanitize=address
