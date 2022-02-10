@@ -24,8 +24,11 @@ Recode printf.
 
 ```zsh
 git clone https://github.com/Masaya-Kamei/ft_printf.git --recursive;
-cd ft_printf/sample;
-./run_sample.sh;
+cd ft_printf;
+make;
+gcc -w main/main.c -I./includes -L. -lftprintf;
+echo -e "\n---Output---";
+./a.out;
 ```
 
 ## Tool
