@@ -1,8 +1,8 @@
 # 42 ft_printf
 
-`int ft_printf(const char *argv, ...);`
-
 Recode printf.
+
+`int ft_printf(const char *argv, ...);`
 
 - Conversions
   - c- char
