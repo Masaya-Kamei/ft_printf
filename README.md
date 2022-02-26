@@ -20,7 +20,7 @@ Recode printf.
   - width
   - precision
 
-## Usage example
+## Sample script
 
 ```zsh
 git clone https://github.com/Masaya-Kamei/ft_printf.git --recursive;
