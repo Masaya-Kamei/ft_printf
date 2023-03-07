@@ -1,10 +1,10 @@
 # 42 ft_printf
 
-Recode printf.
+printf を再実装
 
 `int ft_printf(const char *argv, ...);`
 
-- Conversions
+- 変換指定子
   - c- char
   - s- string
   - p- pointer
@@ -14,21 +14,21 @@ Recode printf.
   - x- hex
   - X- hex (large alpha)
   - %- percent char
-- Flags
+- フラグ類
   - 0
   - \*
-  - width
-  - precision
+  - 最小フィールド幅
+  - 精度
 
 ## Sample script
 
 ```zsh
-git clone https://github.com/Masaya-Kamei/ft_printf.git --recursive;
-cd ft_printf;
-make;
-gcc -w main/main.c -I./includes -L. -lftprintf;
-echo -e "\n---Output---";
-./a.out;
+git clone https://github.com/Masaya-Kamei/ft_printf.git --recursive
+cd ft_printf
+make
+gcc -w main/main.c -I./includes -L. -lftprintf
+echo -e "\n---Output---"
+./a.out
 ```
 
 ## Tool
